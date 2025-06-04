@@ -1,0 +1,31 @@
+{
+  "name": "gerenciamentodetarefas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init": "npx tsc --init",
+    "build": "npx tsc",
+    "dev": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts",
+    "test:server": "node --import tsx src/server.ts "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/express": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.9",
+    "nodemon": "^3.1.10",
+    "prisma": "^6.8.2",
+    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.8.2",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
