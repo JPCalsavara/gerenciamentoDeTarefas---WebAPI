@@ -1,47 +1,47 @@
 # API de Gerenciamento de Tarefas
 
-[cite_start]Apresentamos uma API de Gerenciamento de Tarefas, projetada para ser o elo de comunicação central entre uma aplicação de gerenciamento de tarefas e seu sistema de armazenamento de dados. Esta API facilita a interação dos usuários com suas tarefas por meio de um conjunto bem definido de endpoints.
+Apresentamos uma API de Gerenciamento de Tarefas, projetada para ser o elo de comunicação central entre uma aplicação de gerenciamento de tarefas e seu sistema de armazenamento de dados. Esta API facilita a interação dos usuários com suas tarefas por meio de um conjunto bem definido de endpoints.
 
 ## Como Funciona?
 
-[cite_start]Imagine esta API como um eficiente mensageiro digital: ela recebe solicitações da aplicação cliente (como "criar uma nova tarefa" ou "listar minhas pendências") e as encaminha para o sistema de dados, retornando com as respostas apropriadas. [cite_start]Este mecanismo permite que diferentes componentes de software conversem entre si de forma padronizada e organizada, assegurando uma troca de informações fluida.
+Imagine esta API como um eficiente mensageiro digital: ela recebe solicitações da aplicação cliente (como "criar uma nova tarefa" ou "listar minhas pendências") e as encaminha para o sistema de dados, retornando com as respostas apropriadas. Este mecanismo permite que diferentes componentes de software conversem entre si de forma padronizada e organizada, assegurando uma troca de informações fluida.
 
 ## Funcionalidade Principal
 
-[cite_start]Toda vez que a aplicação cliente necessitar interagir com o banco de dados – seja para registrar um novo usuário, criar uma tarefa, efetuar login, ou qualquer outra operação relacionada a dados – ela enviará requisições para esta API, que processará e coordenará as ações necessárias.
+Toda vez que a aplicação cliente necessitar interagir com o banco de dados – seja para registrar um novo usuário, criar uma tarefa, efetuar login, ou qualquer outra operação relacionada a dados – ela enviará requisições para esta API, que processará e coordenará as ações necessárias.
 
 ## Funcionalidades Detalhadas
 
 A API oferece as seguintes funcionalidades aos usuários:
 
-* [cite_start]**Cadastro de Usuário (RF01):** Permite que novos usuários se registrem no sistema fornecendo nome, e-mail e senha.
+* **Cadastro de Usuário (RF01):** Permite que novos usuários se registrem no sistema fornecendo nome, e-mail e senha.
 * **Autenticação com JWT (RF02):**
-    * [cite_start]Usuários podem realizar login utilizando e-mail e senha.
-    * [cite_start]Em caso de sucesso, o sistema gera e retorna um token JWT.
-    * [cite_start]Este token é essencial para autenticar o acesso a rotas protegidas da API.
+    * Usuários podem realizar login utilizando e-mail e senha.
+    * Em caso de sucesso, o sistema gera e retorna um token JWT.
+    * Este token é essencial para autenticar o acesso a rotas protegidas da API.
 * **Listagem de Tarefas (RF03):**
-    * [cite_start]Usuários autenticados podem visualizar todas as tarefas que cadastraram.
-    * [cite_start]As tarefas são exibidas com detalhes como título, descrição, status e data de criação.
-* [cite_start]**Criação de Tarefa (RF04):** Usuários autenticados podem criar novas tarefas, especificando título e descrição.
-* [cite_start]**Edição de Tarefa (RF05):** Usuários autenticados têm a capacidade de modificar o título, descrição e status de suas tarefas existentes.
-* [cite_start]**Exclusão de Tarefa (RF06):** Usuários autenticados podem remover qualquer uma de suas tarefas.
-* [cite_start]**Validação de Acesso (RF07):** O sistema garante que um usuário não possa acessar, editar ou excluir tarefas que pertençam a outros usuários.
+    * Usuários autenticados podem visualizar todas as tarefas que cadastraram.
+    * As tarefas são exibidas com detalhes como título, descrição, status e data de criação.
+* **Criação de Tarefa (RF04):** Usuários autenticados podem criar novas tarefas, especificando título e descrição.
+* **Edição de Tarefa (RF05):** Usuários autenticados têm a capacidade de modificar o título, descrição e status de suas tarefas existentes.
+* **Exclusão de Tarefa (RF06):** Usuários autenticados podem remover qualquer uma de suas tarefas.
+* **Validação de Acesso (RF07):** O sistema garante que um usuário não possa acessar, editar ou excluir tarefas que pertençam a outros usuários.
 
 ## Características Técnicas (Requisitos Não Funcionais)
 
 Para garantir a qualidade e eficiência da API, os seguintes aspectos foram considerados:
 
 * **Segurança (RNF01):**
-    * [cite_start]O token JWT é assinado com uma chave secreta robusta para garantir sua integridade.
-    * [cite_start]Rotas que dão acesso a dados sensíveis verificam a validade do token antes de processar a requisição.
-* [cite_start]**Padrão API RESTful (RNF02):** A API segue os princípios RESTful, com rotas bem organizadas e o uso correto dos verbos HTTP, facilitando a integração.
-* [cite_start]**Persistência de Dados Simplificada (RNF03):** Os dados da aplicação são armazenados em um banco de dados em memória, ideal para desenvolvimento e prototipagem rápida.
-* [cite_start]**Separação de Responsabilidades (RNF04):** O projeto é estruturado seguindo padrões como MVC ou MVCS, promovendo um código mais organizado e de fácil manutenção através da separação de camadas (modelo, visão/serviço, controlador).
-* [cite_start]**Documentação (RNF05):** A API conta com uma documentação essencial para seu entendimento e uso, como este arquivo README.
+    * O token JWT é assinado com uma chave secreta robusta para garantir sua integridade.
+    * Rotas que dão acesso a dados sensíveis verificam a validade do token antes de processar a requisição.
+* **Padrão API RESTful (RNF02):** A API segue os princípios RESTful, com rotas bem organizadas e o uso correto dos verbos HTTP, facilitando a integração.
+* **Persistência de Dados Simplificada (RNF03):** Os dados da aplicação são armazenados em um banco de dados em memória, ideal para desenvolvimento e prototipagem rápida.
+* **Separação de Responsabilidades (RNF04):** O projeto é estruturado seguindo padrões como MVC ou MVCS, promovendo um código mais organizado e de fácil manutenção através da separação de camadas (modelo, visão/serviço, controlador).
+* **Documentação (RNF05):** A API conta com uma documentação essencial para seu entendimento e uso, como este arquivo README.
 
 ## Rotas da API
 
-[cite_start]As interações com a API são feitas através das seguintes rotas:
+As interações com a API são feitas através das seguintes rotas:
 
 | Ação            | Método HTTP | Rota          |
 |-----------------|-------------|---------------|
@@ -51,7 +51,7 @@ Para garantir a qualidade e eficiência da API, os seguintes aspectos foram cons
 | Criar tarefa    | POST        | /tasks        |
 | Atualizar tarefa| PUT         | /tasks/:id    |
 | Excluir tarefa  | DELETE      | /tasks/:id    |
-[cite_start][cite: 23]
+[cite: 23]
 
 ## Testando com Docker
 
@@ -59,23 +59,23 @@ Para facilitar os testes e garantir um ambiente de execução consistente, é po
 
 ## Diretrizes de Desenvolvimento
 
-[cite_start]O desenvolvimento seguiu as seguintes orientações e tecnologias:
+O desenvolvimento seguiu as seguintes orientações e tecnologias:
 
 * **Organização do Código:**
-    * [cite_start]Controladores (na capacitação tem exemplo) 
-    * [cite_start]Casos de uso (na capacitação tem exemplo) 
-    * [cite_start]Repository (na capacitação tem exemplo) 
-    * [cite_start]Factory para construir os controladores 
+    * Controladores (na capacitação tem exemplo) 
+    * Casos de uso (na capacitação tem exemplo) 
+    * Repository (na capacitação tem exemplo) 
+    * Factory para construir os controladores 
 * **Banco de Dados:**
-    * [cite_start]Implementação de um banco de dados em memória (na capacitação tem exemplo) 
+    * Implementação de um banco de dados em memória (na capacitação tem exemplo) 
 * **Ambiente Tecnológico:**
-    * [cite_start]Linguagem: Typescript 
-    * [cite_start]Runtime: Node.js 
-    * [cite_start]Framework API: Express.js 
+    * Linguagem: Typescript 
+    * Runtime: Node.js 
+    * Framework API: Express.js 
 * **Versionamento:**
-    * [cite_start]Git e Github 
+    * Git e Github 
 
 ## Código Fonte
 
 O código fonte do projeto está disponível no seguinte repositório:
-* [cite_start]https://github.com/hitalloazevedo/bootcamp-atria-backend
+* https://github.com/hitalloazevedo/bootcamp-atria-backend
