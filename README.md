@@ -217,10 +217,8 @@ docker-compose down
 
 Para remover o volume também (atenção: isso apagará os dados do banco):
 
-Bash
 
 ```bash
 docker-compose down -v
 ```
 
-O projeto deve seguir a arquitetura MVC ou MVCS e conter documentação básica (ex: README).
