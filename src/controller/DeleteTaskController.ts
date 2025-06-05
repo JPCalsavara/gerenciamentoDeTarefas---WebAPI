@@ -10,9 +10,9 @@ export class DeleteTaskController {
     try {
       const idTask = Number.parseInt(req.params.id);
 
-      if (!idTask || Object.keys(idTask).length === 0) {
+      if (isNaN(idTask)) {
         return res.status(400).json({
-          error: "Request body is required",
+          error: "Invalid or missing task ID",
         });
       }
       const result = await this.deleteTaskUseCase.execute({ idTask });
