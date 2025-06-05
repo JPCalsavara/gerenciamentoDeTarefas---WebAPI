@@ -6,16 +6,26 @@ import {
 
 export class UpdateTaskController {
   constructor(private updateTaskUseCase: UpdateTaskUseCase) {}
+
   async handle(req: Request, res: Response) {
     try {
-      const idTask = Number.parseInt(req.params.id);
+      const idTask = Number(req.params.id);
       const { title, description, status } = req.body;
 
-      if (!idTask || Object.keys(idTask).length === 0) {
-        return res.status(400).json({
-          error: "Request body is required",
+      if (isNaN(idTask)) {
+        res.status(400).json({
+          error: "Invalid task ID",
         });
+        return;
       }
+
+      if (!title || !description || !status) {
+        res.status(400).json({
+          error: "Missing required fields: title, description, or status",
+        });
+        return;
+      }
+
       const result = await this.updateTaskUseCase.execute({
         title,
         description,
@@ -23,12 +33,14 @@ export class UpdateTaskController {
         idTask,
       });
 
-      return res.status(201).json(result);
+      res.status(200).json(result);
+      return;
     } catch (error) {
-      console.error("Error creating task:", error);
-      return res.status(500).json({
+      console.error("Error updating task:", error);
+      res.status(500).json({
         error: "Internal server error",
       });
+      return;
     }
   }
 }
