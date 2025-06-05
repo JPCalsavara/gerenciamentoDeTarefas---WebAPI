@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
   // Para PostgreSQL, 'native' geralmente é suficiente para desenvolvimento local.
   // Se precisar de um target específico para deploy (ex: ambiente Linux),
   // você pode adicionar 'linux-musl-openssl-3.0.x' ou 'debian-openssl-3.0.x' novamente.
