@@ -86,14 +86,7 @@ class PrismaRepository {
     });
 
     return tasks.map(
-      (task: {
-        title: string;
-        description: string;
-        status: TaskStatus;
-        createdAt: Date;
-        userId: number;
-        id: number;
-      }) =>
+      (task) =>
         new Task(
           task.title,
           task.description,

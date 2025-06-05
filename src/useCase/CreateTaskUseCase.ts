@@ -10,6 +10,7 @@ export class CreateTaskUseCase {
   constructor(private prismaRepository: PrismaRepository) {}
 
   async execute({ title, description, idUser }: CreateTaskDTO) {
+    console.log("Entrei no UseCase - Task");
     try {
       await this.prismaRepository.createTask({
         title,

@@ -12,21 +12,26 @@ export class CreateTaskController {
       const data = req.body;
 
       if (!data || Object.keys(data).length === 0) {
-        return res.status(400).json({
+        res.status(400).json({
           error: "Request body is required",
         });
+        return;
       }
 
       console.log("estou no controlador");
 
       const result = await this.createTaskUseCase.execute(data);
 
-      return res.status(201).json({ message: "Task created successfully" });
+      console.log("\n", result, "\n");
+
+      res.status(201).json({ message: "Task created successfully" });
+      return;
     } catch (error) {
       console.error("Error creating task:", error);
-      return res.status(500).json({
+      res.status(500).json({
         error: "Internal server error",
       });
+      return;
     }
   }
 }

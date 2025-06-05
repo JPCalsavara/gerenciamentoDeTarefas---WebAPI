@@ -8,14 +8,20 @@ export class UpdateTaskController {
   constructor(private updateTaskUseCase: UpdateTaskUseCase) {}
   async handle(req: Request, res: Response) {
     try {
-      const data = req.body;
+      const idTask = Number.parseInt(req.params.id);
+      const { title, description, status } = req.body;
 
-      if (!data || Object.keys(data).length === 0) {
+      if (!idTask || Object.keys(idTask).length === 0) {
         return res.status(400).json({
           error: "Request body is required",
         });
       }
-      const result = await this.updateTaskUseCase.execute(data);
+      const result = await this.updateTaskUseCase.execute({
+        title,
+        description,
+        status,
+        idTask,
+      });
 
       return res.status(201).json(result);
     } catch (error) {

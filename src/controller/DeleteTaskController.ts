@@ -8,14 +8,14 @@ export class DeleteTaskController {
   constructor(private deleteTaskUseCase: DeleteTaskUseCase) {}
   async handle(req: Request, res: Response) {
     try {
-      const data = req.body;
+      const idTask = Number.parseInt(req.params.id);
 
-      if (!data || Object.keys(data).length === 0) {
+      if (!idTask || Object.keys(idTask).length === 0) {
         return res.status(400).json({
           error: "Request body is required",
         });
       }
-      const result = await this.deleteTaskUseCase.execute(data);
+      const result = await this.deleteTaskUseCase.execute({ idTask });
 
       return res.status(201).json(result);
     } catch (error) {
