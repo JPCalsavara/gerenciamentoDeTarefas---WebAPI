@@ -54,28 +54,42 @@ class PrismaRepository {
   async createTask({
     title,
     description,
-    idUser, // idUser agora é um número (Int)
+    idUser,
   }: CreateTaskDTO): Promise<Task> {
-    const task = await this.db.task.create({
-      data: {
-        title,
-        description,
-        status: TaskStatus.TODO,
-        userId: idUser, // userId agora é um número (Int)
-        // createdAt não é mais necessário aqui, pois o @default(now()) no schema.prisma
-        // fará com que o banco de dados defina automaticamente a data de criação.
-      },
-    });
+    try {
+      // First check if user exists
+      const userExists = await this.db.user.findUnique({
+        where: { id: idUser },
+      });
 
-    // Os IDs (task.id e task.userId) agora são números (Int)
-    return new Task(
-      task.title,
-      task.description,
-      task.status as TaskStatus,
-      task.createdAt,
-      task.userId,
-      task.id
-    );
+      if (!userExists) {
+        throw new Error(`User with id ${idUser} not found`);
+      }
+
+      const task = await this.db.task.create({
+        data: {
+          title,
+          description,
+          status: TaskStatus.TODO,
+          userId: idUser,
+        },
+      });
+
+      return new Task(
+        task.title,
+        task.description,
+        task.status as TaskStatus,
+        task.createdAt,
+        task.userId,
+        task.id
+      );
+    } catch (error) {
+      console.error("Error creating task:", error);
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error("Failed to create task in database");
+    }
   }
 
   async getAllTasks({ idUser }: GetAllTasksDTO): Promise<Task[]> {
@@ -102,26 +116,42 @@ class PrismaRepository {
     title,
     description,
     status,
-    idTask, // idTask agora é um número (Int)
+    idTask,
   }: UpdateTaskDTO): Promise<Task> {
-    const task = await this.db.task.update({
-      where: { id: idTask }, // idTask agora é um número (Int)
-      data: {
-        title,
-        description,
-        status,
-      },
-    });
+    try {
+      // First check if task exists
+      const taskExists = await this.db.task.findUnique({
+        where: { id: idTask },
+      });
 
-    // Os IDs (task.id e task.userId) agora são números (Int)
-    return new Task(
-      task.title,
-      task.description,
-      task.status as TaskStatus,
-      task.createdAt,
-      task.userId,
-      task.id
-    );
+      if (!taskExists) {
+        throw new Error(`Task with id ${idTask} not found`);
+      }
+
+      const task = await this.db.task.update({
+        where: { id: idTask },
+        data: {
+          title,
+          description,
+          status,
+        },
+      });
+
+      return new Task(
+        task.title,
+        task.description,
+        task.status as TaskStatus,
+        task.createdAt,
+        task.userId,
+        task.id
+      );
+    } catch (error) {
+      console.error("Error updating task:", error);
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error("Failed to update task in database");
+    }
   }
 
   async deleteTask({ idTask }: DeleteTaskDTO): Promise<void> {

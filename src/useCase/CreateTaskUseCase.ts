@@ -1,24 +1,28 @@
 import { CreateTaskDTO } from "../DTO/CreateTaskDTO";
-// import {
-//   InMemoryRepository,
-//   inMemoryRepository,
-// } from "../Infra/InMemoryRepository";
-
+import { Task } from "../entities/Task";
 import { PrismaRepository, prismaRepository } from "../Infra/RepositoryDB";
 
 export class CreateTaskUseCase {
   constructor(private prismaRepository: PrismaRepository) {}
 
-  async execute({ title, description, idUser }: CreateTaskDTO) {
-    console.log("Entrei no UseCase - Task");
+  async execute({ title, description, idUser }: CreateTaskDTO): Promise<Task> {
     try {
-      await this.prismaRepository.createTask({
+      const task = await this.prismaRepository.createTask({
         title,
         description,
         idUser,
       });
+
+      if (!task) {
+        throw new Error("Failed to create task");
+      }
+
+      return task;
     } catch (error) {
-      throw new Error("Error creating task");
+      console.error("Error creating task:", error);
+      throw new Error(
+        error instanceof Error ? error.message : "Error creating task"
+      );
     }
   }
 }
